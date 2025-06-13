@@ -45,7 +45,7 @@ public class Deck {
 			}
 			
 			String[] faceCards = {"ace","jack","queen","king"};
-			int[] vals = {1,11,12,13};
+			int[] vals = {1,10,10,10};
 			
 			for (int f = 0; f < 4; f ++) {
 				String img = "/images/" + faceCards[f] + "_of_" + suit + ".png";
