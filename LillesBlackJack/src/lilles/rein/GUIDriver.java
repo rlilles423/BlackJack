@@ -30,9 +30,10 @@ public class GUIDriver extends Application {
 		Label wlcm = new Label("Welcome to blackJack");
 		wlcm.setAlignment(Pos.CENTER);
 		
+		//create the deck
 		Deck deck = new Deck();
 		
-		
+		// the image of the back of a card representing the deck
 		Image imgBlank = new Image("/images/blank.png", 100, 0, true, false);
 		ImageView imageView = new ImageView(imgBlank);
 		
@@ -119,10 +120,13 @@ public class GUIDriver extends Application {
 		});
 		
 		btnHit.setOnAction(e -> {
+			// Get the top card
 			playerCards.add(deck.get(0));
+			//remove it from the deck so there is a new top card
 			deck.remove(0);
 			pCardValue.setText("Player Total: " + totalValue(playerCards));
 			
+			//Display the new card
 			ImageView newPlayerCard = new ImageView(playerCards.get(playerCards.size() - 1).getImage());
 			pCardHld.getChildren().add(newPlayerCard);
 			
@@ -130,14 +134,13 @@ public class GUIDriver extends Application {
 		
 		btnStand.setOnAction(e -> {
 			
-			
-			
-			
-			while (totalValue(dealerCards) < 16) {
+			// dealer will hit on anything less than 16 
+			while (totalValue(dealerCards) <= 16) {
 				dealerCards.add(deck.get(0));
 				deck.remove(0);
 				dCardValue.setText("Dealer Total: " + totalValue(dealerCards));
 				
+				//display dealers new cards
 				ImageView newDealerCard = new ImageView(dealerCards.get(dealerCards.size() - 1).getImage());
 				dCardHld.getChildren().add(newDealerCard);
 			}
@@ -157,7 +160,12 @@ public class GUIDriver extends Application {
 		stage.show();
 
 	}
-
+	
+	/**
+	 * Calculates the total value of cards in a given array list
+	 * @param cards the arraylist of cards being values
+	 * @return the total numerical value of the array of cards
+	 */
 	public static int totalValue(ArrayList<Card> cards) {
 		int total = 0;
 		for (Card c: cards) {
